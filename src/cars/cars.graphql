@@ -1,0 +1,22 @@
+type Query {
+    cars: [Car]
+    car(id: ID!): Car
+}
+
+type Car {
+    _id: ID
+    id: ID
+    regNumber: String
+    brand: String
+    model: String
+    color: String
+    transmissionType: Int
+    stats: CarRidesAverage
+}
+
+type CarRidesAverage {
+    count: Float
+    duration: Float
+    load: Float
+    load2: Float
+}

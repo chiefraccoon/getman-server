@@ -1,0 +1,19 @@
+type Query {
+    rides: [Ride]
+    ride(id: ID!): Ride
+    ridesByCar(id: ID!): [Ride]
+}
+
+type Ride {
+    id: ID
+    car: ID
+    startPoint: Point
+    endPoint: Point
+    startedAt: String
+    endedAt: String
+}
+
+type Point {
+    type: String
+    coordinates: [String]
+}
