@@ -22,7 +22,7 @@ export class StatsService {
         }))
           .update({ upsert: true })
           .then(() => {
-            console.log('Update processed for car!', carItem.id, data.load);
+            console.log('Update processed for car!', carItem.id, data);
           })
           .catch(err => {
             console.error(err, carItem.id);
@@ -78,10 +78,10 @@ export class StatsService {
           }, { countSum: 0, durationSum: 0, loadSum: 0 });
 
         const averageTotal = {
-          count: periodsSum.countSum / periodsCount,
-          duration: periodsSum.durationSum / periodsCount,
-          load: periodsSum.loadSum / periodsCount,
-          load2: (periodsSum.durationSum * periodsSum.countSum * 100) / (24 * 60 * Math.pow(periodsCount, 2)),
+          count: (periodsSum.countSum / periodsCount) || 0,
+          duration: (periodsSum.durationSum / periodsCount) || 0,
+          load: (periodsSum.loadSum / periodsCount) || 0,
+          load2: ((periodsSum.durationSum * periodsSum.countSum * 100) / (24 * 60 * Math.pow(periodsCount, 2))) || 0,
         };
 
         return averageTotal;
@@ -89,5 +89,3 @@ export class StatsService {
 
   }
 }
-
-//StatsService.updateRecords();
