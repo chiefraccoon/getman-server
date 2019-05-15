@@ -9,7 +9,8 @@ import { RidesService } from '../rides/rides.service';
 
 @Injectable()
 export class StatsService {
-  constructor(private readonly ridesService: RidesService) {}
+  constructor(private readonly ridesService: RidesService) {
+  }
 
   async updateRecords() {
     const carsList = await Car.find();
@@ -18,9 +19,14 @@ export class StatsService {
         (new Stats({
           car: carItem.id,
           ...data,
-        })).update({upsert: true}).catch(err => {
-          console.error(err, carItem.id);
-        });
+        }))
+          .update({ upsert: true })
+          .then(() => {
+            console.log('Update prcessed!');
+          })
+          .catch(err => {
+            console.error(err, carItem.id);
+          });
       });
     });
   }
