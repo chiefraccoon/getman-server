@@ -16,11 +16,10 @@ export class StatsService {
     const carsList = await Car.find();
     carsList.map(carItem => {
       this.calculateCarStats(carItem.id).then(data => {
-        (new Stats({
-          car: carItem.id,
-          ...data,
-        }))
-          .update({ upsert: true })
+        Stats.findOneAndUpdate({ car: carItem.id },
+          { ...data },
+          { upsert: true },
+        )
           .then(() => {
             console.log('Update processed for car!', carItem.id, data);
           })
