@@ -22,7 +22,7 @@ export class StatsService {
         }))
           .update({ upsert: true })
           .then(() => {
-            console.log('Update prcessed!');
+            console.log('Update processed for car!', carItem.id);
           })
           .catch(err => {
             console.error(err, carItem.id);
