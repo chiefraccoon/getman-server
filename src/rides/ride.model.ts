@@ -1,6 +1,5 @@
 import * as mongoose from 'mongoose';
 import { ObjectId } from 'mongoose';
-import { sum } from 'lodash';
 
 const PointSchema = new mongoose.Schema({
   type: {

@@ -5,10 +5,12 @@ import { Injectable } from '@nestjs/common';
 
 import Stats from './stats.model';
 import Car from '../cars/car.model';
-import Ride from '../rides/ride.model';
+import { RidesService } from '../rides/rides.service';
 
 @Injectable()
 export class StatsService {
+  constructor(private readonly ridesService: RidesService) {}
+
   async updateRecords() {
     const carsList = await Car.find();
     carsList.map(carItem => {
@@ -24,9 +26,7 @@ export class StatsService {
   }
 
   calculateCarStats(carId: string) {
-    return Ride.find({
-      car: carId,
-    })
+    return this.ridesService.findByCarId(carId)
       .then(data => {
         const groupedRides = data
           .filter(rideItem => rideItem.endedAt > rideItem.startedAt)

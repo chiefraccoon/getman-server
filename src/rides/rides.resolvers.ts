@@ -5,8 +5,7 @@ import { RidesService } from './rides.service';
 
 @Resolver('Ride')
 export class RidesResolvers {
-  constructor(private readonly ridesService: RidesService) {
-  }
+  constructor(private readonly ridesService: RidesService) {}
 
   @Query('rides')
   async getCars() {
